@@ -1,0 +1,172 @@
+<!--  making the to do app list task second -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To Do List-App</title>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- css start  -->
+	<style>
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Poppins';
+			}
+			body{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+                background: radial-gradient(circle, rgb(9, 163, 224) 0%, rgb(226, 241, 7) 100%);
+            }
+			.box{
+				position: relative;
+				width: 450px;
+				height: 550px;
+				border-radius: 30px;
+                background-color: #2f363e;
+				padding: 30px 50px;
+				box-shadow: 25px 25px 75px rgba(0,0,0,0.25),10px 10px 70px rgba(0,0,0,0.25),
+				inset 5px 5px 10px rgba(0,0,0,0.5),
+				inset 5px 5px 20px rgba(255,255,255,0.2),
+				inset -5px -5px 15px rgba(0,0,0,0.75);
+            }
+			h2{
+				width: 100%;
+				font-weight: 700;
+				text-align: center;
+				color:#fff;
+				margin-bottom: 10px;
+				font-size: 1.75em;
+			}
+			#input{
+				position: relative;
+				width: 100%;
+				border: none;
+				outline: none;
+				padding: 15px 22px;
+				border-radius: 30px;
+				font-size: 1em;
+				box-shadow: 5px 5px 7px rgba(0,0,0,0.25),inset 2px 2px 5px rgba(0,0,0,0.5),inset -3px -3px 5px rgba(0,0,0,0.5);
+			}
+			.box li{
+				position: relative;
+				display: flex;
+				align-items: center;
+				background-color: #1f83f2;
+				margin: 15px 0;
+				padding: 10px 10px 10px 45px;
+				min-height: 45px;
+				cursor: pointer;
+				border-radius: 22.5px;
+				box-shadow: 5px 5px 7px rgba(0,0,0,0.25),inset 2px 2px 5px rgba(0,0,0,0.5),inset -3px -3px 5px rgba(0,0,0,0.5);
+				color: #fff;
+				width: calc(100% - 40px);
+			}
+			.box li i{
+				position: absolute;
+				width: 30px;
+				right: -40px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: 50%;
+				box-shadow: 5px 5px 7px rgba(0,0,0,0.25),inset 2px 2px 5px rgba(255,255,255,0.25),inset -3px -3px 5px rgba(0,0,0,0.5);
+				height: 30px;
+				background-color: #ff2c74;
+			}
+			.box li i::before{
+				content: '';
+				position: absolute;
+				width: 15px;
+				height: 2px;
+				background-color: white;
+				transform: rotate(45deg);
+			}
+			.box li i::after{
+				content: '';
+				position: absolute;
+				width: 15px;
+				height: 2px;
+				background-color: white;
+				transform: rotate(-45deg);
+			}
+			.box li::before{
+				content: ' ';
+				position: absolute;
+				left: 8px;
+				width: 30px;
+				height: 30px;
+				background-color: #2f363e;
+				border-radius: 50%;
+			}		
+			.box li.done{
+				background-color:#607d8b;
+			}
+			.box li.done:after{
+				content: '';
+				position: absolute;
+				width: 12px;
+				height: 6px;
+				left:  16px;
+				transform: rotate(315deg);
+				border-left:2px solid #fff;
+				border-bottom: 2px solid #fff;
+			}
+			#list{
+				position: relative;
+				margin-top: 20px;
+				height: 350px;
+				overflow-y: auto;
+				padding-right: 10px;
+			}
+			::-webkit-scrollbar-track{
+				box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+			}
+			::-webkit-scrollbar{
+				width: 5px;
+			}
+			::-webkit-scrollbar-thumb{
+				background-color: #fff;
+			}
+            /* css end  */
+	</style>
+</head>
+<body>
+
+	<div class="container">
+		<div class="box">
+			<h2>To Do List App !</h2>
+			<input type="text" placeholder=" Write here ..... " id="input">
+			<ul id="list"></ul>
+		</div>
+	</div>
+	<script>
+        //  start for js to working this
+		let inputBx = document.querySelector('#input');
+		let list = document.querySelector('#list');
+		
+			inputBx.addEventListener("keyup",function(event){
+				if(event.key == "Enter"){
+						addItem(this.value)
+						this.value = "";
+				}
+			})
+
+			let addItem = (inputBx) =>{
+			let listitem = document.createElement("li");
+			listitem.innerHTML = `${inputBx}<i></i>`;
+			listitem.addEventListener("click",function(){
+				this.classList.toggle('done')
+			})
+
+				listitem.querySelector("i").addEventListener("click",function(){
+					listitem.remove();
+				})
+			
+                list.appendChild(listitem);
+		}
+	</script>
+</body>
+</html>
